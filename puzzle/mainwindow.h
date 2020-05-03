@@ -9,7 +9,8 @@ class MainWindow;
 }
 //Cabeceras de las funciones propias
 
-
+int randint();
+void mergeM(vector<vector<vector<int>>> &_posA,vector<vector<vector<int>>> &_indx,vector<vector<bool>> &_posF);
 
 //
 class MainWindow : public QMainWindow
@@ -17,13 +18,17 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    vector<vector<vector<int>>> posA,posC;//matrices de posiciones. Instantanea y de comprobacion
-    vector<vector<bool>> posF;//matiz para posicionar la casilla libre
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    vector<vector<vector<int>>> posA,posC,indx;//matrices de posiciones. Instantanea y de comprobacion
+    vector<vector<bool>> posF;//matiz para posicionar la casilla libre
+    int imagS;
+
     void setpos(vector<vector<vector<int>>> &posV);
     void setimag(int numI);
+    void move(vector<vector<vector<int>>> &posC,vector<vector<bool>> &freeC, int i, int j);
+
 
 
 private slots:

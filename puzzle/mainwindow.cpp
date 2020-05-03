@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
     QMainWindow(parent),
@@ -10,22 +12,36 @@ MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
     ui->setupUi(this);
 
     //definicion de la matriz de posiciones
-    posC={  {  { {100,100} },{ {300,100} },{ {500,100} }  },
+    posC={  {  { {100,100} },{ {300,100} },{ {500,100} }  },//esto NO representa el tablero
             {  { {100,300} },{ {300,300} },{ {500,300} }  },
             {  { {100,500} },{ {300,500} },{ {500,500} }  }   };
     posA=posC;//posicion de los botones igual a la matriz de comprobacion al comenzar la partida, es decir, ordenado
 
-    posF={  {  { false },{ false },{ false }  },
-            {  { false },{ false },{ false }  },
+    posF={  {  { false },{ false },{ false }  },//esta lo unico que hace es seguir la casilla vacia con el true
+            {  { false },{ false },{ false }  },//esto SI representa el tablero
             {  { false },{ false },{ true  }  }   };
-    MainWindow::setimag(1);
+
+    indx =      {   {  { {0,0} },{ {0,1} },{ {0,2} }  },//matriz para indexar
+                    {  { {1,0} },{ {1,1} },{ {1,2} }  },
+                    {  { {2,0} },{ {2,1} },{ {2,2} }  }   };
+
+    imagS=1;//seleccion de la imagen por default
+    /*FUNCION DE SELECCION DE LA IMAGEN QUE SE GUARDARA COMO ENTERO EN imagS*/
+    MainWindow::setimag(imagS);//se llama a la funcion de asignacion de imagenes
+    mergeM(posA,indx,posF);
+    MainWindow::setpos(posA);
+
 }
 
-MainWindow::~MainWindow()
+
+MainWindow::~MainWindow()//destructor de la UI
 {
     delete ui;
 }
+//funcion movimiento de las casillas
+void move(){
 
+}
 //funcion donde botones leen posicion
 void MainWindow::setpos(vector<vector<vector<int>>> &posV){
     ui->p1->setGeometry(posV[0][0][0],posV[0][0][1],200,200);
@@ -38,16 +54,17 @@ void MainWindow::setpos(vector<vector<vector<int>>> &posV){
     ui->p8->setGeometry(posV[2][1][0],posV[2][1][1],200,200);
 }
 
+//funcion para poner las imagenes en las casillas
 void MainWindow::setimag(int numI){
 
-    QString path1=":/imag/imag/";
-    path1=path1+QString::number(numI);
+    QString path1=":/imag/imag/";       //ruta general al resurce file
+    path1=path1+QString::number(numI);  //ruta general al resurce file con la imagen seleccionada
 
-    QString path2="_1.jpg";
-    QPixmap icono1(path1+path2);
-    QIcon ButtonIcon1(icono1);
-    ui->p1->setIcon(ButtonIcon1);
-    ui->p1->setIconSize(ui->p1->size());
+    QString path2="_1.jpg";             //ruta concreta a cada fragmento de imagen
+    QPixmap icono1(path1+path2);        //importar la imagen desde el resource file
+    QIcon ButtonIcon1(icono1);          //establecer imagen como un objeto icono
+    ui->p1->setIcon(ButtonIcon1);       //asignarselo al boton correspondiente
+    ui->p1->setIconSize(ui->p1->size());//ajustar el tamaño de la imagen al boton
 
     path2="_2.jpg";
     QPixmap icono2(path1+path2);
@@ -94,40 +111,49 @@ void MainWindow::setimag(int numI){
 
 void MainWindow::on_p1_clicked()
 {
-
+    int i = 0;
+    int j = 0;
+    //MainWindow::setpos(posC);
 }
 
 void MainWindow::on_p2_clicked()
 {
-
+    int i = 0;
+    int j = 1;
 }
 
 void MainWindow::on_p3_clicked()
 {
-
+    int i = 0;
+    int j = 2;
 }
 
 void MainWindow::on_p4_clicked()
 {
-
+    int i = 1;
+    int j = 0;
 }
 
 void MainWindow::on_p5_clicked()
 {
-
+    int i = 1;
+    int j = 1;
 }
 
 void MainWindow::on_p6_clicked()
 {
-
+    int i = 1;
+    int j = 2;
 }
 
 void MainWindow::on_p7_clicked()
 {
-
+    int i = 2;
+    int j = 0;
 }
 
 void MainWindow::on_p8_clicked()
 {
-
+    int i = 2;
+    int j = 1;
 }
