@@ -12,19 +12,10 @@ MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
     ui->setupUi(this);
 
 
-    posA=posC;//posicion de los botones igual a la matriz de comprobacion al comenzar la partida, es decir, ordenado
-/*
-    posF={  {  { false },{ false },{ false }  },//esta lo unico que hace es seguir la casilla vacia con el true
-            {  { false },{ false },{ false }  },//esto SI representa el tablero
-            {  { false },{ false },{ true  }  }   };*/
+    buttonPos={     {  { 1 },{ 2 },{ 3 }  },        //esta lo unico que hace es seguir la casilla vacia con el true
+                    {  { 4 },{ 5 },{ 6 }  },        //esto SI representa el tablero
+                    {  { 7 },{ 8 },{ 9 }  }   };
 
-    buttonPos={  {  { 1 },{ 2 },{ 3 }  },        //esta lo unico que hace es seguir la casilla vacia con el true
-            {  { 4 },{ 5 },{ 6 }  },        //esto SI representa el tablero
-            {  { 7 },{ 8 },{ 9 }  }   };
-/*
-    indx =  {   {  { {0,0} },{ {0,1} },{ {0,2} }  },//matriz para indexar
-                {  { {1,0} },{ {1,1} },{ {1,2} }  },
-                {  { {2,0} },{ {2,1} },{ {2,2} }  }   };*/
 
     imagS=1;//seleccion de la imagen por default
     /*FUNCION DE SELECCION DE LA IMAGEN QUE SE GUARDARA COMO ENTERO EN imagS*/
@@ -141,43 +132,58 @@ void MainWindow::on_p1_clicked()
 {
 
     int buttIdent = 1;
-    int bi=0,bj=0;
-    //move(buttonPos,buttIdent);//funcion que movera la tecla pulsada si se puede mover--> solo cambia posiciones en la matriz de indentificadores
-    //MainWindow::setpos();
+    //int bi=0,bj=0;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
+
     //checkResult(buttonPos);//esta funcion tendra una copia de la matriz de indentificadores ordenada y la comprobara despues de cada movimiento
 }
 
 void MainWindow::on_p2_clicked()
 {
-    int butIdent = 2;
+    int buttIdent = 2;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
 }
 
 void MainWindow::on_p3_clicked()
 {
-    int butIdent = 3;
+    int buttIdent = 3;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
 }
 
 void MainWindow::on_p4_clicked()
 {
-    int butIdent = 4;
+    int buttIdent = 4;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
 }
 
 void MainWindow::on_p5_clicked()
 {
-    int butIdent = 5;
+    int buttIdent = 5;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
 }
 
 void MainWindow::on_p6_clicked()
 {
-    int butIdent = 6;
+    int buttIdent = 6;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
 }
 
 void MainWindow::on_p7_clicked()
 {
-    int butIdent = 7;
+    int buttIdent = 7;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
 }
 
 void MainWindow::on_p8_clicked()
 {
-    int butIdent = 8;
+    int buttIdent = 8;
+    moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
 }

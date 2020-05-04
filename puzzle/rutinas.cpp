@@ -50,10 +50,53 @@ void findElement(vector<vector<int>> &vvi,int elm,int *i,int *j){
     }
 
 }
-/*
+//funcion para encontrar el agujero si lo hay y sus cordenadas
+bool findGap(vector<vector<int>> bPos, int *_iG, int *_jG, int _iB, int _jB ){
+
+    vector <int> iV,jV;
+    int dimi,dimj;
+
+    if(_iB==0 || _iB==2){iV={1};dimi=1;}else{iV={0,2};dimi=2;}
+    if(_jB==0 || _jB==2){jV={1};dimj=1;}else{jV={0,2};dimj=2;}
+
+    for(int k=0; k<dimi;k++){//se comprueba la columna
+
+        if(bPos[iV[k]][_jB]==9){
+            *_iG=iV[k];
+            *_jG=_jB;
+            return true;
+        }
+    }
+
+    for(int k=0;k<dimj;k++){//se comprueba la fila
+
+        if(bPos[_iB][jV[k]]==9){
+            *_iG=_iB;
+            *_jG=jV[k];
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 //esta funcion movera los elementos dentro de la matriz si el movimiento es valido
-void move(vector<vector<int>> &identM, int p){
+void moveB(vector<vector<int>> &_buttPos, int p){
+
+    int iB=0, jB=0;//index en la matriz del boton
+    int iG=0, jG=0;//index del hueco si lo hubiera
+    bool gap=false;//ident hueco
+    findElement(_buttPos,p,&iB,&jB);//en los indices ya tengo la posicion del boton
+    //hay que conseguir los indices adyacentes de la casilla
+
+    gap=findGap(_buttPos,&iG,&jG,iB,jB);//la funcion modifica los indices en caso de encontrar el hueco y delvuelve true
+
+    if(gap){//si se ha encontrado hueco
+
+        swap(_buttPos[iB][jB],_buttPos[iG][jG]);//se intercambian las posiciones
+    }
 
 
 }
-*/
+

@@ -8,10 +8,12 @@ namespace Ui {
 class MainWindow;
 }
 //Cabeceras de las funciones propias
-
+/////////////////////////////////////////////////////////
 int randint();
 void mergeM(vector<vector<int>> &buttNum);
 void findElement(vector<vector<int>> &vvi,int elm,int *i,int *j);
+void moveB(vector<vector<int>> &_buttPos, int p);
+////////////////////////////////////////////////////////
 
 //
 class MainWindow : public QMainWindow
@@ -22,14 +24,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    vector<vector<vector<int>>> posA,posC,indx;//matrices de posiciones. Instantanea y de comprobacion
-    vector<vector<bool>> posF;//matiz para posicionar la casilla libre
-    vector<vector<int>> buttonPos;
+    vector<vector<int>> buttonPos;//declaracion de la matriz de posiciones
     int imagS;
 
-    void setpos(vector<vector<int>> posF);
+    void setpos(vector<vector<int>> posF);//declaracion de los metodos propios de la clase ventana
     void setimag(int numI);
-    //void move(vector<vector<vector<int>>> &posC,vector<vector<bool>> &freeC, int i, int j);
 
 
 
