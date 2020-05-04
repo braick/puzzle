@@ -21,15 +21,39 @@ int randint()
 
 }
 //funcion para mezclar la matriz de coordenadas
-void mergeM(vector<vector<vector<int>>> &_posA,vector<vector<vector<int>>> &_indx,vector<vector<bool>> &_posF){
+void mergeM(vector<vector<int>> &buttNum){
     srand((unsigned)time(NULL));
     for(int n=0; n<100; n++){
         int _i1=randint();
         int _j1=randint();
         int _i2=randint();
         int _j2=randint();
-        swap(_posA[_i1][_j1],_posA[_i2][_j2]);
-        swap(_posF[_i1][_j1],_posF[_i2][_j2]);
-        swap(_indx[_i1][_j1],_indx[_i2][_j2]);
+
+        swap(buttNum[_i1][_j1],buttNum[_i2][_j2]);
     }
 }
+
+//devuelve los indices del elemento a buscar en un vector 2D  de enteros
+void findElement(vector<vector<int>> &vvi,int elm,int *i,int *j){
+
+    vector<vector<int>>::iterator row;
+    vector<int>::iterator col;
+    for (row = vvi.begin(); row != vvi.end(); row++) {
+        for (col = row->begin(); col != row->end(); col++) {
+            if (*col==elm) {
+                return;
+            }
+            (*j)++;
+        }
+        *j=0;
+        (*i)++;
+    }
+
+}
+/*
+//esta funcion movera los elementos dentro de la matriz si el movimiento es valido
+void move(vector<vector<int>> &identM, int p){
+
+
+}
+*/

@@ -10,7 +10,8 @@ class MainWindow;
 //Cabeceras de las funciones propias
 
 int randint();
-void mergeM(vector<vector<vector<int>>> &_posA,vector<vector<vector<int>>> &_indx,vector<vector<bool>> &_posF);
+void mergeM(vector<vector<int>> &buttNum);
+void findElement(vector<vector<int>> &vvi,int elm,int *i,int *j);
 
 //
 class MainWindow : public QMainWindow
@@ -23,11 +24,12 @@ public:
 
     vector<vector<vector<int>>> posA,posC,indx;//matrices de posiciones. Instantanea y de comprobacion
     vector<vector<bool>> posF;//matiz para posicionar la casilla libre
+    vector<vector<int>> buttonPos;
     int imagS;
 
-    void setpos(vector<vector<vector<int>>> &posV);
+    void setpos(vector<vector<int>> posF);
     void setimag(int numI);
-    void move(vector<vector<vector<int>>> &posC,vector<vector<bool>> &freeC, int i, int j);
+    //void move(vector<vector<vector<int>>> &posC,vector<vector<bool>> &freeC, int i, int j);
 
 
 
