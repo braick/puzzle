@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <vector>
+#include <QTimer>
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -25,12 +26,13 @@ public:
     ~MainWindow();
 
     vector<vector<int>> buttonPos;//declaracion de la matriz de posiciones
-    int imagS;
-
+    int imagS,imagMAX,t;
     void setpos(vector<vector<int>> posF);//declaracion de los metodos propios de la clase ventana
     void setimag(int numI);
 
+public slots:
 
+    void tfunct();
 
 private slots:
     void on_p1_clicked();
@@ -49,8 +51,16 @@ private slots:
 
     void on_p8_clicked();
 
+    void on_flechaD_clicked();
+
+    void on_flechaI_clicked();
+
+    void on_start_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    QTimer *timer;
 
 };
 

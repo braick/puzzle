@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+//#include <QTimer>
 using namespace std;
 MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
     QMainWindow(parent),
@@ -16,12 +17,24 @@ MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
                     {  { 4 },{ 5 },{ 6 }  },        //esto SI representa el tablero
                     {  { 7 },{ 8 },{ 9 }  }   };
 
-
+    timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(tfunct()));//definicion del objeto del cronometro
     imagS=1;//seleccion de la imagen por default
-    /*FUNCION DE SELECCION DE LA IMAGEN QUE SE GUARDARA COMO ENTERO EN imagS*/
-    MainWindow::setimag(imagS);//se llama a la funcion de asignacion de imagenes
-    mergeM(buttonPos);
-    MainWindow::setpos(buttonPos);
+    t=0;
+
+    QPixmap fD(":/imag/imag/fD.png");
+    QIcon iconD(fD);
+    ui->flechaD->setIcon(iconD);
+    ui->flechaD->setIconSize(ui->flechaD->size());
+
+    QPixmap fI(":/imag/imag/fI.png");
+    QIcon iconI(fI);
+    ui->flechaI->setIcon(iconI);
+    ui->flechaI->setIconSize(ui->flechaI->size());
+
+    imagMAX=2;
+    QPixmap pix(":/imag/imag/1.jpg");
+    ui->label_2->setPixmap(pix.scaled(ui->label_2->width(),ui->label_2->height(),Qt::KeepAspectRatio));
 
 }
 
@@ -135,6 +148,7 @@ void MainWindow::on_p1_clicked()
     //int bi=0,bj=0;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    timer->start(1000);
 
     //checkResult(buttonPos);//esta funcion tendra una copia de la matriz de indentificadores ordenada y la comprobara despues de cada movimiento
 }
@@ -185,5 +199,51 @@ void MainWindow::on_p8_clicked()
 {
     int buttIdent = 8;
     moveB(buttonPos,buttIdent);
+    MainWindow::setpos(buttonPos);
+}
+
+void MainWindow::tfunct(){
+    //static int t=0;
+    ui->label->setText( QString::number(t));
+    //ui->lcdNumber->set
+    t++;
+}
+
+void MainWindow::on_flechaD_clicked()
+{
+    if(imagS<imagMAX){
+        imagS++;
+        QString p1=":/imag/imag/";
+        QString p2=QString::number(imagS);
+        QString p3=".jpg";
+        QPixmap pix(p1+p2+p3);
+        ui->label_2->setPixmap(pix.scaled(ui->label_2->width(),ui->label_2->height(),Qt::KeepAspectRatio));
+
+    }
+}
+void MainWindow::on_flechaI_clicked()
+{
+    if(imagS>1){
+        imagS--;
+        QString p1=":/imag/imag/";
+        QString p2=QString::number(imagS);
+        QString p3=".jpg";
+        QPixmap pix(p1+p2+p3);
+        ui->label_2->setPixmap(pix.scaled(ui->label_2->width(),ui->label_2->height(),Qt::KeepAspectRatio));
+
+    }
+}
+
+void MainWindow::on_start_clicked()
+{
+    ui->label_2->setVisible(false);
+    ui->start->setVisible(false);
+    ui->flechaD->setVisible(false);
+    ui->flechaI->setVisible(false);
+
+    //////todo esto va a ir dentro del boton start
+    /*FUNCION DE SELECCION DE LA IMAGEN QUE SE GUARDARA COMO ENTERO EN imagS*/
+    MainWindow::setimag(imagS);//se llama a la funcion de asignacion de imagenes
+    mergeM(buttonPos);
     MainWindow::setpos(buttonPos);
 }
