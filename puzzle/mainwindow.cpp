@@ -13,28 +13,33 @@ MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
     ui->setupUi(this);
 
 
-    buttonPos={     {  { 1 },{ 2 },{ 3 }  },        //esta lo unico que hace es seguir la casilla vacia con el true
+    buttonPos={     {  { 1 },{ 2 },{ 3 }  },
                     {  { 4 },{ 5 },{ 6 }  },        //esto SI representa el tablero
-                    {  { 7 },{ 8 },{ 9 }  }   };
+                    {  { 7 },{ 8 },{ 0 }  }   };
 
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(tfunct()));//definicion del objeto del cronometro
-    imagS=1;//seleccion de la imagen por default
-    t=0;
+    t=0;//inicio del temporizador en 0
 
-    QPixmap fD(":/imag/imag/fD.png");
+    imagS=1;//seleccion de la imagen por default
+
+
+    QPixmap fD(":/imag/imag/fD.png");//imagen de la flecha derecha
     QIcon iconD(fD);
     ui->flechaD->setIcon(iconD);
     ui->flechaD->setIconSize(ui->flechaD->size());
 
-    QPixmap fI(":/imag/imag/fI.png");
+    QPixmap fI(":/imag/imag/fI.png");//imagen de la flecha izquierda
     QIcon iconI(fI);
     ui->flechaI->setIcon(iconI);
     ui->flechaI->setIconSize(ui->flechaI->size());
 
-    imagMAX=2;
-    QPixmap pix(":/imag/imag/1.jpg");
+    imagMAX=2;//numero de imagenes en el resource pack
+    QPixmap pix(":/imag/imag/1.jpg");//seleccion de la primera imagen por default
     ui->label_2->setPixmap(pix.scaled(ui->label_2->width(),ui->label_2->height(),Qt::KeepAspectRatio));
+
+    ui->panel_final->setVisible(false);//hacer invisible el panel final
+    ui->fin_partida->setVisible(false);//                  boton final partida
 
 }
 
@@ -141,6 +146,27 @@ void MainWindow::setimag(int numI){
     ui->p8->setIconSize(ui->p1->size());
 }
 
+
+void MainWindow::check(vector<vector<int>> &_buttonPos){
+
+    vector<vector<int>> buttonPosRef={      {  { 1 },{ 2 },{ 3 }  },
+                                            {  { 4 },{ 5 },{ 6 }  },
+                                            {  { 7 },{ 8 },{ 0 }  }   };
+    if(_buttonPos==buttonPosRef){
+        ui->panel_final->setVisible(true);//hacer visible el panel final
+        ui->fin_partida->setVisible(true);//                  boton final partida
+        timer->stop();
+        QString tex1="HAS GANADO\n\n Completado en:";
+        QString tex2=QString::number(t);
+        QString tex3=" segundos";
+
+        ui->panel_final->setText(tex1+tex2+tex3);
+
+    }
+
+}
+
+
 void MainWindow::on_p1_clicked()
 {
 
@@ -148,9 +174,7 @@ void MainWindow::on_p1_clicked()
     //int bi=0,bj=0;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
-    timer->start(1000);
-
-    //checkResult(buttonPos);//esta funcion tendra una copia de la matriz de indentificadores ordenada y la comprobara despues de cada movimiento
+    check(buttonPos);
 }
 
 void MainWindow::on_p2_clicked()
@@ -158,6 +182,7 @@ void MainWindow::on_p2_clicked()
     int buttIdent = 2;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    check(buttonPos);
 }
 
 void MainWindow::on_p3_clicked()
@@ -165,6 +190,7 @@ void MainWindow::on_p3_clicked()
     int buttIdent = 3;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    check(buttonPos);
 }
 
 void MainWindow::on_p4_clicked()
@@ -172,6 +198,7 @@ void MainWindow::on_p4_clicked()
     int buttIdent = 4;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    check(buttonPos);
 }
 
 void MainWindow::on_p5_clicked()
@@ -179,6 +206,7 @@ void MainWindow::on_p5_clicked()
     int buttIdent = 5;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    check(buttonPos);
 }
 
 void MainWindow::on_p6_clicked()
@@ -186,6 +214,7 @@ void MainWindow::on_p6_clicked()
     int buttIdent = 6;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    check(buttonPos);
 }
 
 void MainWindow::on_p7_clicked()
@@ -193,6 +222,7 @@ void MainWindow::on_p7_clicked()
     int buttIdent = 7;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    check(buttonPos);
 }
 
 void MainWindow::on_p8_clicked()
@@ -200,6 +230,7 @@ void MainWindow::on_p8_clicked()
     int buttIdent = 8;
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
+    check(buttonPos);
 }
 
 void MainWindow::tfunct(){
@@ -246,4 +277,11 @@ void MainWindow::on_start_clicked()
     MainWindow::setimag(imagS);//se llama a la funcion de asignacion de imagenes
     mergeM(buttonPos);
     MainWindow::setpos(buttonPos);
+    timer->start(1000);
 }
+
+void MainWindow::on_fin_partida_clicked()
+{
+
+}
+

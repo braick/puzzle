@@ -20,6 +20,36 @@ int randint()
 
 
 }
+
+//funcion para comprobar si la configuracion del puzle es resoluble
+int getInvCount(vector<int> arr)
+{
+    int inv_count = 0;
+    for (int i = 0; i < 9 - 1; i++)
+        for (int j = i+1; j < 9; j++)
+             if (arr[j] && arr[i] &&  arr[i] > arr[j])
+                  inv_count++;
+    return inv_count;
+}
+
+//conversion de la matriz de posiciones a un vector unidimensional
+bool isSolvable(vector<vector<int>> vvi)
+{
+
+    vector<int> _butpos1d;
+    vector<vector<int>>::iterator row;
+    vector<int>::iterator col;
+    for (row = vvi.begin(); row != vvi.end(); row++) {
+        for (col = row->begin(); col != row->end(); col++) {
+           _butpos1d.push_back(*col);
+        }
+    }
+    int invCount = getInvCount(_butpos1d);
+    return (invCount%2 == 0);
+}
+
+
+
 //funcion para mezclar la matriz de coordenadas
 void mergeM(vector<vector<int>> &buttNum){
     srand((unsigned)time(NULL));
@@ -30,6 +60,10 @@ void mergeM(vector<vector<int>> &buttNum){
         int _j2=randint();
 
         swap(buttNum[_i1][_j1],buttNum[_i2][_j2]);
+    }
+
+    if(!isSolvable(buttNum)){
+        mergeM(buttNum);
     }
 }
 
@@ -61,7 +95,7 @@ bool findGap(vector<vector<int>> bPos, int *_iG, int *_jG, int _iB, int _jB ){
 
     for(int k=0; k<dimi;k++){//se comprueba la columna
 
-        if(bPos[iV[k]][_jB]==9){
+        if(bPos[iV[k]][_jB]==0){
             *_iG=iV[k];
             *_jG=_jB;
             return true;
@@ -70,7 +104,7 @@ bool findGap(vector<vector<int>> bPos, int *_iG, int *_jG, int _iB, int _jB ){
 
     for(int k=0;k<dimj;k++){//se comprueba la fila
 
-        if(bPos[_iB][jV[k]]==9){
+        if(bPos[_iB][jV[k]]==0){
             *_iG=_iB;
             *_jG=jV[k];
             return true;

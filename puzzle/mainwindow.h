@@ -29,6 +29,7 @@ public:
     int imagS,imagMAX,t;
     void setpos(vector<vector<int>> posF);//declaracion de los metodos propios de la clase ventana
     void setimag(int numI);
+    void check(vector<vector<int>> &_buttonPos);
 
 public slots:
 
@@ -56,6 +57,8 @@ private slots:
     void on_flechaI_clicked();
 
     void on_start_clicked();
+
+    void on_fin_partida_clicked();
 
 private:
     Ui::MainWindow *ui;
