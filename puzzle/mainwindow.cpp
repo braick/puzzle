@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <iostream>
 //#include <QTimer>
 using namespace std;
 MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
@@ -34,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
     ui->flechaI->setIcon(iconI);
     ui->flechaI->setIconSize(ui->flechaI->size());
 
-    imagMAX=2;//numero de imagenes en el resource pack
+    imagMAX=7;//numero de imagenes en el resource pack
     QPixmap pix(":/imag/imag/1.jpg");//seleccion de la primera imagen por default
     ui->label_2->setPixmap(pix.scaled(ui->label_2->width(),ui->label_2->height(),Qt::KeepAspectRatio));
 
@@ -156,7 +157,7 @@ void MainWindow::check(vector<vector<int>> &_buttonPos){
         ui->panel_final->setVisible(true);//hacer visible el panel final
         ui->fin_partida->setVisible(true);//                  boton final partida
         timer->stop();
-        QString tex1="HAS GANADO\n\n Completado en:";
+        QString tex1="HAS GANADO\n\n Completado en: ";
         QString tex2=QString::number(t);
         QString tex3=" segundos";
 
@@ -175,6 +176,7 @@ void MainWindow::on_p1_clicked()
     moveB(buttonPos,buttIdent);
     MainWindow::setpos(buttonPos);
     check(buttonPos);
+    //cout<<"Pulsado"<<endl;
 }
 
 void MainWindow::on_p2_clicked()
@@ -235,7 +237,8 @@ void MainWindow::on_p8_clicked()
 
 void MainWindow::tfunct(){
     //static int t=0;
-    ui->label->setText( QString::number(t));
+    QString tiempo="TIEMPO: ";
+    ui->tiempo->setText(tiempo + QString::number(t));
     //ui->lcdNumber->set
     t++;
 }
@@ -272,6 +275,7 @@ void MainWindow::on_start_clicked()
     ui->flechaD->setVisible(false);
     ui->flechaI->setVisible(false);
 
+
     //////todo esto va a ir dentro del boton start
     /*FUNCION DE SELECCION DE LA IMAGEN QUE SE GUARDARA COMO ENTERO EN imagS*/
     MainWindow::setimag(imagS);//se llama a la funcion de asignacion de imagenes
@@ -282,6 +286,11 @@ void MainWindow::on_start_clicked()
 
 void MainWindow::on_fin_partida_clicked()
 {
-
+    ui->label_2->setVisible(true);
+    ui->start->setVisible(true);
+    ui->flechaD->setVisible(true);
+    ui->flechaI->setVisible(true);
+    ui->panel_final->setVisible(false);//hacer visible el panel final
+    ui->fin_partida->setVisible(false);
+    t=0;
 }
-
