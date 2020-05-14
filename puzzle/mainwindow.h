@@ -14,6 +14,8 @@ int randint();
 void mergeM(vector<vector<int>> &buttNum);
 void findElement(vector<vector<int>> &vvi,int elm,int *i,int *j);
 void moveB(vector<vector<int>> &_buttPos, int p);
+
+bool solv(vector<vector<int>> vecto,vector<int> &movments_array);
 ////////////////////////////////////////////////////////
 
 //
@@ -27,6 +29,7 @@ public:
 
     vector<vector<int>> buttonPos;//declaracion de la matriz de posiciones
     int imagS,imagMAX,t;
+    bool fair_play;
     void setpos(vector<vector<int>> posF);//declaracion de los metodos propios de la clase ventana
     void setimag(int numI);
     void check(vector<vector<int>> &_buttonPos);
@@ -59,6 +62,10 @@ private slots:
     void on_start_clicked();
 
     void on_fin_partida_clicked();
+
+    void on_slv_clicked();
+
+    void on_orden_clicked();
 
 private:
     Ui::MainWindow *ui;

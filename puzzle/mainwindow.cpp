@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <windows.h>
 //#include <QTimer>
 using namespace std;
 MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
@@ -23,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent) ://constructor de la UI
     t=0;//inicio del temporizador en 0
 
     imagS=1;//seleccion de la imagen por default
+
+    fair_play=true;
 
 
     QPixmap fD(":/imag/imag/fD.png");//imagen de la flecha derecha
@@ -153,7 +156,7 @@ void MainWindow::check(vector<vector<int>> &_buttonPos){
     vector<vector<int>> buttonPosRef={      {  { 1 },{ 2 },{ 3 }  },
                                             {  { 4 },{ 5 },{ 6 }  },
                                             {  { 7 },{ 8 },{ 0 }  }   };
-    if(_buttonPos==buttonPosRef){
+    if(_buttonPos==buttonPosRef && fair_play){
         ui->panel_final->setVisible(true);//hacer visible el panel final
         ui->fin_partida->setVisible(true);//                  boton final partida
         timer->stop();
@@ -293,4 +296,40 @@ void MainWindow::on_fin_partida_clicked()
     ui->panel_final->setVisible(false);//hacer visible el panel final
     ui->fin_partida->setVisible(false);
     t=0;
+}
+
+void MainWindow::on_slv_clicked()
+{
+
+   ui->solve_resp->setText("...");
+
+   vector<int> movements_to_solve;
+   bool solvable = solv(buttonPos,movements_to_solve);
+
+   if(solvable){
+   fair_play=false;
+   ui->tiempo->setVisible(false);
+   vector<int>::iterator iter;
+
+   for (iter = movements_to_solve.begin();iter != movements_to_solve.end();iter++) {
+
+       moveB(buttonPos, *iter);//
+       MainWindow::setpos(buttonPos);
+       //Sleep(500);
+       cout<<*iter<<endl;
+   }
+   }else {
+   cout<<"no se puede resolver"<<endl;
+   ui->solve_resp->setText("Can't Solve");
+}
+}
+
+void MainWindow::on_orden_clicked()
+{
+    buttonPos =     {   {  { 1 },{ 2 },{ 3 }  },
+                        {  { 4 },{ 5 },{ 6 }  },
+                        {  { 7 },{ 8 },{ 0 }  }   };
+    MainWindow::setpos(buttonPos);
+    fair_play=false;
+    ui->tiempo->setVisible(false);
 }

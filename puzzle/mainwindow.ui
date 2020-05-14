@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>800</height>
+    <height>850</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -251,6 +251,61 @@
      <string>JUGAR OTRA VEZ</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="slv">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>720</y>
+      <width>201</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial Black</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>RESOLVER CON A*</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="orden">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>720</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial Black</family>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>ORDENAR</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="solve_resp">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>720</y>
+      <width>251</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>p1</zorder>
    <zorder>p2</zorder>
    <zorder>p3</zorder>
@@ -266,6 +321,9 @@
    <zorder>panel_final</zorder>
    <zorder>fin_partida</zorder>
    <zorder>start</zorder>
+   <zorder>slv</zorder>
+   <zorder>orden</zorder>
+   <zorder>solve_resp</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -273,7 +331,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
